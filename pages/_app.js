@@ -1,13 +1,24 @@
 import "../styles/globals.css"
+import Head from "next/head"
 import { MoralisProvider } from "react-moralis"
 import Header from "../components/Header"
 
+const APP_ID = process.env.NEXT_PUBLIC_MORALIS_API_ID
+const SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER
+
 function MyApp({ Component, pageProps }) {
     return (
-        <MoralisProvider initializeOnMount={false}>
-            <Component {...pageProps} />
-            <Header />
-        </MoralisProvider>
+        <div>
+            <Head>
+                <title>NFT Marketplace</title>
+                <meta name="description" content="NFT Marketplace" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
+                <Header />
+                <Component {...pageProps} />
+            </MoralisProvider>
+        </div>
     )
 }
 
